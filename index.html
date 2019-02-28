@@ -392,7 +392,8 @@
 <p>一种典型的无等待结构就是 RCU （Read-Copy-Update）。它的基本思想是，对数据的读可以不加控制。因此，所有的读线程都是无等待的，他们既不会被锁定等待也不会引起任何冲突。但在写书的时候，先取得原始数据的副本，接着只修改副本数据，修改完成后，在合适的时机写回数据。</p>
 <h2 id="多线程的性质"><a href="#多线程的性质" class="headerlink" title="多线程的性质"></a>多线程的性质</h2><h4 id="一、原子性-Atomicity"><a href="#一、原子性-Atomicity" class="headerlink" title="一、原子性 ( Atomicity )"></a>一、原子性 ( Atomicity )</h4><p>原子性是指一个操作是不可中断的。即使是在多个线程一起执行的时候，一个操作一旦开始，就不会被其他线程干扰。（但如果我们使用 long 型的话，对于 32 位系统来说，long 型数据的读写不是原子性的，因为 long 有 64 位）</p>
 <h4 id="二、可见性-Visibility"><a href="#二、可见性-Visibility" class="headerlink" title="二、可见性 ( Visibility )"></a>二、可见性 ( Visibility )</h4><p>可见性是指当一个线程修改了某一个共享变量的值，其他线程是否能够立即知道这个修改。</p>
-<p>附上一个还不错的链接：<a href="https://blog.csdn.net/fu123123fu/article/details/79794017" target="_blank" rel="noopener">https://blog.csdn.net/fu123123fu/article/details/79794017</a></p>
+<p>附上一个还不错的链接：</p>
+<p>​    <a href="https://blog.csdn.net/fu123123fu/article/details/79794017" target="_blank" rel="noopener">https://blog.csdn.net/fu123123fu/article/details/79794017</a></p>
 <h4 id="三、有序性-Ordering"><a href="#三、有序性-Ordering" class="headerlink" title="三、有序性 ( Ordering )"></a>三、有序性 ( Ordering )</h4><p>有序性是指程序在执行的时候，程序的代码执行顺序和语句的顺序是一致的。</p>
 <p>为什么会出现不一致的情况呢？</p>
 <p>这是由于重排序的缘故。</p>
