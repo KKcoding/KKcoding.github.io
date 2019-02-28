@@ -390,7 +390,14 @@
 <h4 id="四、无锁-Lock-Free"><a href="#四、无锁-Lock-Free" class="headerlink" title="四、无锁  ( Lock-Free )"></a>四、无锁  ( Lock-Free )</h4><p>​    无锁的并行都是无障碍的。在无锁的情况下，所有的线程都能尝试对临界区进行访问，但不同的是，无锁的并发保证必然有一个线程能够在有限步内完成操作离开临界区。（必然会有一个会胜出，竞争失败的线程，它们还会不断的重试，直到自己胜出）</p>
 <h4 id="五、无等待-Wait-Free"><a href="#五、无等待-Wait-Free" class="headerlink" title="五、无等待 ( Wait-Free )"></a>五、无等待 ( Wait-Free )</h4><p>​    无等待在无锁的基础上更进一步进行扩展。他要求所有的线程必须在有限步内完成，这样就不会引起饥饿问题。</p>
 <p>​    一种典型的无等待结构就是 RCU （Read-Copy-Update）。它的基本思想是，对数据的读可以不加控制。因此，所有的读线程都是无等待的，他们既不会被锁定等待也不会引起任何冲突。但在写书的时候，先取得原始数据的副本，接着只修改副本数据，修改完成后，在合适的时机写回数据。</p>
-<h2 id="多线程的性质"><a href="#多线程的性质" class="headerlink" title="多线程的性质"></a>多线程的性质</h2><h4 id="一、原子性-Atomicity"><a href="#一、原子性-Atomicity" class="headerlink" title="一、原子性 ( Atomicity )"></a>一、原子性 ( Atomicity )</h4><h4 id="二、可见性-Visibility"><a href="#二、可见性-Visibility" class="headerlink" title="二、可见性 ( Visibility )"></a>二、可见性 ( Visibility )</h4><h4 id="三、有序性-Ordering"><a href="#三、有序性-Ordering" class="headerlink" title="三、有序性 ( Ordering )"></a>三、有序性 ( Ordering )</h4>
+<h2 id="多线程的性质"><a href="#多线程的性质" class="headerlink" title="多线程的性质"></a>多线程的性质</h2><h4 id="一、原子性-Atomicity"><a href="#一、原子性-Atomicity" class="headerlink" title="一、原子性 ( Atomicity )"></a>一、原子性 ( Atomicity )</h4><p>​    原子性是指一个操作是不可中断的。即使是在多个线程一起执行的时候，一个操作一旦开始，就不会被其他线程干扰。（但如果我们使用 long 型的话，对于 32 位系统来说，long 型数据的读写不是原子性的，因为 long 有 64 位）</p>
+<h4 id="二、可见性-Visibility"><a href="#二、可见性-Visibility" class="headerlink" title="二、可见性 ( Visibility )"></a>二、可见性 ( Visibility )</h4><p>​    可见性是指当一个线程修改了某一个共享变量的值，其他线程是否能够立即知道这个修改。</p>
+<p>​    附上一个还不错的链接：<a href="https://blog.csdn.net/fu123123fu/article/details/79794017" target="_blank" rel="noopener">https://blog.csdn.net/fu123123fu/article/details/79794017</a></p>
+<h4 id="三、有序性-Ordering"><a href="#三、有序性-Ordering" class="headerlink" title="三、有序性 ( Ordering )"></a>三、有序性 ( Ordering )</h4><p>​    有序性是指程序在执行的时候，程序的代码执行顺序和语句的顺序是一致的。</p>
+<p>​    为什么会出现不一致的情况呢？</p>
+<p>​    这是由于重排序的缘故。</p>
+<p>​    在Java内存模型中，允许编译器和处理器对指令进行重排序，但是重排序过程不会影响到单线程程序的执行，却会影响到多线程并发执行的正确性。</p>
+
           
         
       
